@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>社区文化墙智能生成器 - 古月AI智能体</title>
+<title>合作伙伴Logo文化墙智能生成器 - 古月AI智能体</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:"Microsoft YaHei",sans-serif;}
 body{
   min-height:100vh;
-  background:linear-gradient(135deg,#fff7e6,#e0f7e6,#d0f0ff,#fdfcfb);
+  background:linear-gradient(135deg,#f5f5f5,#e0e0e0,#ffffff,#fafafa);
   background-size:400% 400%;
-  animation:bgmove 30s infinite;
+  animation:bgmove 25s infinite;
   color:#333;padding:50px;
 }
 @keyframes bgmove{
@@ -21,7 +21,7 @@ body{
 .container{max-width:1200px;margin:auto;}
 .title{
   font-size:36px;text-align:center;margin-bottom:40px;
-  background:linear-gradient(90deg,#ffd270,#90ee90,#87cefa);
+  background:linear-gradient(90deg,#4facfe,#00f2fe,#43e97b);
   -webkit-background-clip:text;color:transparent;font-weight:700;
 }
 .card{
@@ -38,17 +38,17 @@ input{
 button{
   width:100%;padding:14px;border:none;border-radius:10px;
   font-weight:700;font-size:16px;cursor:pointer;
-  background:linear-gradient(135deg,#ffd270,#90ee90);color:white;
+  background:linear-gradient(135deg,#4facfe,#43e97b);color:white;
   transition:0.3s;
 }
-button:hover{transform:translateY(-2px);box-shadow:0 0 15px #90ee90;}
+button:hover{transform:translateY(-2px);box-shadow:0 0 15px #43e97b;}
 .results{
   display:grid;grid-template-columns:repeat(auto-fill,minmax(420px,1fr));
   gap:20px;
 }
 .promptCard{
   background:rgba(255,255,255,0.18);padding:20px;border-radius:14px;
-  border-left:4px solid #90ee90;
+  border-left:4px solid #43e97b;
   box-shadow:0 6px 20px rgba(0,0,0,0.12);
   transition:0.3s;
 }
@@ -57,14 +57,14 @@ button:hover{transform:translateY(-2px);box-shadow:0 0 15px #90ee90;}
   box-shadow:0 20px 50px rgba(0,0,0,0.2);
 }
 .promptTitle{
-  font-size:18px;margin-bottom:10px;color:#90ee90;
+  font-size:18px;margin-bottom:10px;color:#43e97b;
 }
 .promptText{
   white-space:pre-wrap;font-size:14px;line-height:1.6;color:#111;
 }
 .copyBtn{
   margin-top:12px;padding:8px 16px;border:none;border-radius:8px;
-  background:linear-gradient(135deg,#ffd270,#90ee90);
+  background:linear-gradient(135deg,#4facfe,#43e97b);
   cursor:pointer;font-weight:600;transition:0.3s;color:white;
 }
 .copyBtn.copied{
@@ -82,11 +82,11 @@ button:hover{transform:translateY(-2px);box-shadow:0 0 15px #90ee90;}
 </head>
 <body>
 <div class="container">
-  <div class="title">社区文化墙智能生成器</div>
+  <div class="title">合作伙伴Logo文化墙智能生成器</div>
   <div class="card">
-    <label>请输入社区名称 + 行业/主题 + 文化墙主题</label>
-    <input id="inputText" placeholder="例如：幸福社区-民生服务-温馨社区文化墙">
-    <button onclick="generate()">生成20组社区文化墙提示词</button>
+    <label>请输入企业名称 + 合作类型/展示主题</label>
+    <input id="inputText" placeholder="例如：古月科技-战略合作伙伴-年度合作展示">
+    <button onclick="generate()">生成20组合作伙伴Logo文化墙提示词</button>
   </div>
   <div id="results" class="results"></div>
 </div>
@@ -95,28 +95,26 @@ button:hover{transform:translateY(-2px);box-shadow:0 0 15px #90ee90;}
 <script>
 function rand(arr){return arr[Math.floor(Math.random()*arr.length)]}
 
-// 材质、元素库
-let bgMaterials=["彩色亚克力叠层","PVC UV画面"];
-let frontDecor=["亚克力立体字","金属字"];
-let colorScheme=["暖黄色","社区绿色","天蓝色","米白色"];
-let shapes=["对称布局","矩形模块","条状排列","网格模块"];
-let modules=["主题展示区","活动信息区","志愿服务区","党建引领区","文化生活区","邻里互助区"];
-let elements=["Logo + Slogan","社区简介文字","核心价值观","活动照片展示","志愿服务荣誉","简化插画","几何装饰条","社区特色图标"];
+// 材质、布局、装饰库
+let bgColors=["纯白背景","纯黑背景"];
+let mainMaterials=["亚克力透明框","PVC发泡板UV打印","金属拉丝底板","磁吸更换式Logo牌","软膜灯片","轻量灯箱亮化边框"];
+let layoutTypes=["横向矩阵排列","模块化网格","独立透明亚克力框"];
+let modules=["主标题区","大面积Logo展示区","核心伙伴区","生态合作区","重点项目合作区","小标题标签区","几何装饰线条区","发光边框区"];
+let decorElements=["品牌色块点缀","轻量框线","几何线条","发光灯带","轻量亮化边框"];
 
 function generate(){
   let input = document.getElementById("inputText").value.trim();
-  if(!input){alert("请输入社区名称 + 行业/主题 + 文化墙主题");return;}
+  if(!input){alert("请输入企业名称 + 合作类型/展示主题");return;}
   let resultsDiv = document.getElementById("results");
   resultsDiv.innerHTML="";
   for(let i=1;i<=20;i++){
-    let bg = rand(bgMaterials);
-    let decor = rand(frontDecor);
-    let color = rand(colorScheme);
-    let shape = rand(shapes);
+    let bg = rand(bgColors);
+    let material = rand(mainMaterials);
+    let layout = rand(layoutTypes);
     let moduleSequence = modules.sort(()=>0.5-Math.random()).slice(0,modules.length);
-    let elementSequence = elements.sort(()=>0.5-Math.random()).slice(0,5);
+    let decor = decorElements.sort(()=>0.5-Math.random()).slice(0,3);
 
-    let prompt = `${input}，社区文化墙设计，主体材质为${bg}，前景装饰使用${decor}，主色调为${color}，布局采用${shape}，模块顺序：${moduleSequence.join(" | ")}，模块内容包含：${elementSequence.join(" | ")}，正面视角展示，文字排版规范、无倾斜、无变形，信息清晰、层级分明，突出社区温暖感与归属感，可直接用于即梦 AI / DeepSeek 生成。`;
+    let prompt = `${input}，合作伙伴Logo文化墙设计，主体材质使用${material}，Logo排列采用${layout}，背景为${bg}，模块顺序：${moduleSequence.join(" | ")}，辅助装饰包含：${decor.join(" | ")}，正面视角完整展示，文字排版规范、无倾斜、无变形，Logo占位框清晰可见，突出企业品牌合作与商务专业感，可直接用于即梦 AI / DeepSeek 生成。`;
 
     let card = document.createElement("div");
     card.className="promptCard";
